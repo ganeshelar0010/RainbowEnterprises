@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rainbow Enterprises - Specialist in Digital & Wall Paper Material Supplier in Mumbai, India. High-quality wallpapers for homes, offices, and commercial spaces.">
+    <title>Rainbow Enterprises | Digital & Wallpaper Material Supplier</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007bff;
+            --rainbow1: #ff0000;
+            --rainbow2: #ff7f00;
+            --rainbow3: #ffff00;
+            --rainbow4: #00ff00;
+            --rainbow5: #0000ff;
+            --rainbow6: #4b0082;
+            --rainbow7: #9400d3;
+            --gray: #f8f9fa;
+            --dark: #333;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #fff;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-weight: 700; }
+        a { text-decoration: none; }
+        /* Rainbow Gradient */
+        .rainbow-text {
+            background: linear-gradient(90deg, var(--rainbow1), var(--rainbow2), var(--rainbow3), var(--rainbow4), var(--rainbow5), var(--rainbow6), var(--rainbow7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .rainbow-bg {
+            background: linear-gradient(90deg, var(--rainbow1), var(--rainbow2), var(--rainbow3), var(--rainbow4), var(--rainbow5), var(--rainbow6), var(--rainbow7));
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        .nav-links a {
+            margin-left: 30px;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        #hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,123,255,0.3); }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .btn-whatsapp:hover { background: #128C7E; }
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #about, #why, #contact { background: var(--gray); }
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card i {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        #gallery .grid img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            height: 300px;
+            object-fit: cover;
+        }
+        #gallery .grid img:hover { transform: scale(1.05); }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        #map {
+            height: 400px;
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.8em;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover { color: var(--primary); }
+        /* Floating Buttons */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: white;
+            font-size: 1.8em;
+        }
+        .whatsapp-btn {
+            right: 20px;
+            background: #25D366;
+        }
+        .call-btn {
+            right: 90px;
+            background: var(--primary);
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5em; }
+            .nav-links { display: none; } /* Add hamburger menu if needed */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo rainbow-text">Rainbow Enterprises</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#why">Why Us</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" id="hero">
+        <div class="hero-content">
+            <h1 class="rainbow-text">Rainbow Enterprises</h1>
+            <p>Specialist in Digital & Wall Paper Material Supplier</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Get a Quote</a>
+                <a href="tel:+919324617602" class="btn btn-primary">Call Now</a>
+                <a href="https://wa.me/919324617602" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title rainbow-text">About Us</h2>
+        <p style="text-align:center;max-width:800px;margin:0 auto;">
+            Rainbow Enterprises is a leading supplier of premium digital and wallpaper materials in Mumbai. We specialize in high-quality, durable, and customizable wallpapers for residential, commercial, and office spaces. Trusted by interior designers, architects, and builders across India.
+        </p>
+    </section>
+
+    <section id="products">
+        <h2 class="section-title rainbow-text">Our Products</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://media.houseandgarden.co.uk/photos/67dc464c0f2847aedf2da20b/16:9/w_1280,c_limit/Shot05117_RT-production_digital.jpg" alt="Digital Wallpapers">
+                <h3>Digital Wallpapers</h3>
+                <p>High-resolution custom digital prints for stunning visuals.</p>
+            </div>
+            <div class="card">
+                <img src="https://www.dhresource.com/webp/m/0x0/f2/albu/g10/M00/59/10/rBVaVl7R0jqAEoaVAAJI1qWgAIk571.jpg" alt="3D Wallpapers">
+                <h3>3D Wallpapers</h3>
+                <p>Immersive 3D designs that add depth to any space.</p>
+            </div>
+            <div class="card">
+                <img src="https://www.dhresource.com/webp/m/0x0/f2/albu/g9/M01/4C/A9/rBVaWF7liQqAF_1UAAIlnHiSoRI835.jpg" alt="Custom Wall Murals">
+                <h3>Custom Wall Murals</h3>
+                <p>Personalized murals tailored to your vision.</p>
+            </div>
+            <div class="card">
+                <img src="https://i0.wp.com/icl-imaging.com/wp-content/uploads/BU-West-Office-Entry-.jpg?fit=1920%2C1440&ssl=1" alt="Office & Commercial">
+                <h3>Office & Commercial</h3>
+                <p>Professional wallpapers for corporate environments.</p>
+            </div>
+            <div class="card">
+                <img src="https://s3-blog.homelane.com/design-ideas/wp-content/uploads/2025/09/05002013/modern-colourful-wallpaper-design-for-kids-bedroom-stylish-ideas.png" alt="Kids Room Wallpapers">
+                <h3>Kids Room Wallpapers</h3>
+                <p>Fun and vibrant designs for children's rooms.</p>
+            </div>
+            <div class="card">
+                <img src="http://www.giffywalls.com/cdn/shop/collections/950107-MC447-1654791502-bielsa-blue_new.jpg?v=1757405773" alt="Waterproof & Premium">
+                <h3>Waterproof & Premium</h3>
+                <p>Durable, washable materials for long-lasting beauty.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="why">
+        <h2 class="section-title rainbow-text">Why Choose Us</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-print"></i>
+                <h3>High-Resolution Printing</h3>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Long-Lasting Material</h3>
+            </div>
+            <div class="card">
+                <i class="fas fa-ruler-combined"></i>
+                <h3>Custom Size & Design</h3>
+            </div>
+            <div class="card">
+                <i class="fas fa-truck"></i>
+                <h3>Fast Delivery</h3>
+            </div>
+            <div class="card">
+                <i class="fas fa-users"></i>
+                <h3>Trusted by Designers</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title rainbow-text">Gallery</h2>
+        <div class="grid">
+            <img src="https://www.bhg.com/thmb/rx5PANlOoEFtBE7fSV3Ml9mSH9k=/5290x0/filters:no_upscale():strip_icc()/KrywickiInteriorDesign_092419_01_preview-76183c6691b249e7a5dde2741dc10eb5.jpg" alt="Wallpaper Installation Example 1">
+            <img src="https://images.livspace-cdn.com/w:3840/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/ond-1634120396-Obfdc/1-2025-1736068988-NDPD1/jas-1751884202-slYBH/wl-1753174703-QYs9P/wl-21-1755771574-WkXTm.jpg" alt="Wallpaper Installation Example 2">
+            <img src="https://havenly.com/blog/wp-content/uploads/2024/12/kyliefitts_havenly_january2025_denverchalet_035-3.jpg" alt="Wallpaper Installation Example 3">
+            <img src="https://www.thespruce.com/thmb/OLdMw6bX3rubtA0QewJKGdGx8T0=/2048x0/filters:no_upscale():max_bytes(150000):strip_icc()/ceiling-wallpaper-ideas-4161262-hero-f3a59be570f14a44a601b39ea3dad265.jpg" alt="Wallpaper Installation Example 4">
+            <img src="https://images.livspace-cdn.com/w:3840/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/2properties-1733457217-X1TuH/photoshoots-1735452784-CzJzx/bangalore-1736150519-Ye8X5/neha-devendra-1755331042-3Yiuv/wl-1755331447-QoNid.jpg" alt="Wallpaper Installation Example 5">
+            <img src="https://cdn.magicdecor.in/com/2023/12/13184932/Mughal-Marvels-Mosaic-Wallpaper-710x488.jpg" alt="Wallpaper Installation Example 6">
+            <img src="https://www.thespruce.com/thmb/KoppS0o2HkbzVTrgplii3UwrShE=/3000x0/filters:no_upscale():max_bytes(150000):strip_icc()/gallery-wall-decor-designs-4129057-hero-e6156f68882640aeb3d62b43c80fd626.jpg" alt="Gallery Wall Example">
+            <img src="https://images.squarespace-cdn.com/content/v1/666771d6484d0b7d59e6565e/d8887774-4e8a-4701-a972-5d737850f174/WEAVING+A+STORY+BLOG+8724.png" alt="Wallpaper Design Example">
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title rainbow-text">Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="tel" placeholder="Your Phone" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p style="text-align:center;margin-top:40px;">
+            <strong>Phone:</strong> <a href="tel:+919324617602">+91 9324617602</a><br>
+            <strong>Email:</strong> <a href="mailto:rainbow.ent1234@gmail.com">rainbow.ent1234@gmail.com</a><br>
+            <strong>Address:</strong> 225 Dault, Udyog Bhavan, Wadwali Village, Dr. C. Gidwani Road, Jari Mari Mandir Road, Opp Borla Society, Chembur, Mumbai – 400074
+        </p>
+        <div id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.329!2d72.894!3d19.055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8f0b0b0b0b1%3A0xabc123def4567890!2sChembur%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p class="rainbow-text">Rainbow Enterprises</p>
+        <p>Specialist in Digital & Wall Paper Material Supplier</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 Rainbow Enterprises. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919324617602" target="_blank" class="floating-btn whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919324617602" class="floating-btn call-btn">
+        <i class="fas fa-phone"></i>
+    </a>
+
+</body>
+</html>
