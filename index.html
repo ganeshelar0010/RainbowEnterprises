@@ -341,24 +341,24 @@
         </div>
     </section>
 
-    <section id="contact">
-        <h2 class="section-title rainbow-text">Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="tel" placeholder="Your Phone" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <p style="text-align:center;margin-top:40px;">
-            <strong>Phone:</strong> <a href="tel:+919324617602">+91 9324617602</a><br>
-            <strong>Email:</strong> <a href="mailto:rainbow.ent1234@gmail.com">rainbow.ent1234@gmail.com</a><br>
-            <strong>Address:</strong> 225 Dault, Udyog Bhavan, Wadwali Village, Dr. C. Gidwani Road, Jari Mari Mandir Road, Opp Borla Society, Chembur, Mumbai – 400074
-        </p>
-        <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.329!2d72.894!3d19.055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8f0b0b0b0b1%3A0xabc123def4567890!2sChembur%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
-
+   <section id="contact">
+    <h2 class="section-title rainbow-text">Contact Us</h2>
+    <form id="contactForm">
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
+        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" id="submitBtn">Send Message</button>
+    </form>
+    <p id="formStatus" style="text-align:center;margin-top:20px;font-weight:bold;"></p>
+    <p style="text-align:center;margin-top:40px;">
+        <strong>Phone:</strong> <a href="tel:+919324617602">+91 9324617602</a><br>
+        <strong>Email:</strong> <a href="mailto:rainbow.ent1234@gmail.com">rainbow.ent1234@gmail.com</a><br>
+        <strong>Address:</strong> 225 Dault, Udyog Bhavan, Wadwali Village, Dr. C. Gidwani Road, Jari Mari Mandir Road, Opp Borla Society, Chembur, Mumbai – 400074
+    </p>
+    <div id="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.329!2d72.894!3d19.055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8f0b0b0b0b1%3A0xabc123def4567890!2sChembur%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
     <footer>
         <p class="rainbow-text">Rainbow Enterprises</p>
         <p>Specialist in Digital & Wall Paper Material Supplier</p>
@@ -378,5 +378,80 @@
         <i class="fas fa-phone"></i>
     </a>
 
+   <!-- Contact us script ==> google sheets  -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    
+    if (!form) {
+        console.error('Contact form not found!');
+        return;
+    }
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMsg = document.getElementById('formStatus');
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        console.log('Form submission started', { name, phone, message });
+        
+        // Basic validation
+        if (!name || !phone || !message) {
+            statusMsg.textContent = 'Please fill in all fields.';
+            statusMsg.style.color = 'red';
+            return;
+        }
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusMsg.textContent = 'Submitting your message...';
+        statusMsg.style.color = '#666';
+        
+        try {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzT0CnnsENWQExicfZE0_K5sZ55dEY9rK5yA66-xmiD1Ft2SF_Bi5gnVM0SjwwctZHe/exec';
+            
+            console.log('Sending to:', scriptURL);
+            
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, phone, message })
+            });
+            
+            console.log('Fetch completed');
+            
+            // Success message (can't read response with no-cors)
+            statusMsg.textContent = 'Thank you! Your message has been sent successfully. 🎉';
+            statusMsg.style.color = 'green';
+            
+            // Clear form
+            form.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                statusMsg.textContent = '';
+            }, 5000);
+            
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            statusMsg.textContent = 'Failed to submit. Please try again or contact us directly.';
+            statusMsg.style.color = 'red';
+        } finally {
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }
+    });
+});
+</script>
 </body>
+
 </html>
